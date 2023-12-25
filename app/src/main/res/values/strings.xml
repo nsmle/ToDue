@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ToDue</string>
+    <string name="app_tagline">Pengelola tugas mu sebelum tenggat waktu.</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_task">Tugas</string>
+    <string name="title_notifications">Notifikasi</string>
+</resources>

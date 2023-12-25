@@ -1,0 +1,35 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ToDue" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Text Color-->
+        <item name="android:textColor">@color/dark</item>
+        <item name="android:textColorPrimary">@color/purple</item>
+        <item name="android:textColorSecondary">@color/gray_dark</item>
+
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorPrimaryVariant">@color/purple_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue</item>
+        <item name="colorSecondaryVariant">@color/blue_light</item>
+        <item name="colorOnSecondary">@color/gray</item>
+
+        <!-- Status bar. -->
+        <item name="android:statusBarColor">?android:attr/backgroundTint</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Navigation Bar.-->
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- Font -->
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="fontFamily">@font/poppins</item>
+
+        <!-- Background Color -->
+        <item name="android:backgroundTint">@color/clean</item>
+    </style>
+
+</resources>
