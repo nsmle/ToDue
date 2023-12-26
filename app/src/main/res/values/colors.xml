@@ -1,17 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<!-- Purple -->
 	<color name="purple_light">#9d79ff</color>
 	<color name="purple">#764bf7</color>
+	<!-- Purple Alpha -->
+	<color name="purple_light_alpha">#409d79ff</color>
+	<color name="purple_alpha">#40764bf7</color>
+
+	<!-- Pink -->
 	<color name="pink_light">#f1c2f3</color>
 	<color name="pink">#f468f9</color>
+	<!-- Pink Alpha -->
+	<color name="pink_light_alpha">#80f1c2f3</color>
+	<color name="pink_alpha">#80f468f9</color>
+
+	<!-- Blue -->
 	<color name="blue_light">#b0ecfe</color>
 	<color name="blue">#41d7ed</color>
+	<!-- Blue Alpha -->
+	<color name="blue_light_alpha">#80b0ecfe</color>
+	<color name="blue_alpha">#8041d7ed</color>
+
+	<!-- Teal -->
 	<color name="teal_light">#8bfdf2</color>
 	<color name="teal">#38e0d4</color>
+	<!-- Teal Alpha -->
+	<color name="teal_light_alpha">#808bfdf2</color>
+	<color name="teal_alpha">#8038e0d4</color>
+
+	<!-- Gray -->
 	<color name="gray_extra_light">#E2E2E2</color>
 	<color name="gray_light">#d2d2d2</color>
 	<color name="gray">#b2b2b2</color>
 	<color name="gray_dark">#848690</color>
+	<!-- Others -->
+	<color name="dark_alpha">#e64c5067</color>
 	<color name="dark">#4c5067</color>
 	<color name="clean">#f6f7fb</color>
 	<color name="black">#FF000000</color>

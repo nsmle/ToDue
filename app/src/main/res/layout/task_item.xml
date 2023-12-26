@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:backgroundTint="?attr/colorOnPrimary"
+	app:cardElevation="0dp"
+	app:cardCornerRadius="10dp"
+	android:layout_marginBottom="10dp">
+
+	<!-- Icon -->
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:padding="14dp"
+		android:orientation="horizontal"
+		android:layout_gravity="center_vertical"
+		android:gravity="center_vertical">
+
+		<androidx.cardview.widget.CardView
+			android:id="@+id/task_icon_wrapper"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@color/pink_alpha"
+			app:background="@color/pink_alpha"
+			android:backgroundTint="@color/pink_alpha"
+			app:backgroundTint="@color/pink_alpha"
+			app:cardCornerRadius="14dp"
+			app:cardElevation="0dp">
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="8dp">
+
+				<ImageView
+					android:id="@+id/task_icon"
+					android:layout_width="40dp"
+					android:layout_height="40dp"
+					android:src="@drawable/ic_chart"
+					android:background="@android:color/transparent"
+					app:background="@android:color/transparent"
+					app:tint="@color/pink" />
+			</LinearLayout>
+		</androidx.cardview.widget.CardView>
+
+		<!-- Content -->
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:layout_marginLeft="@dimen/defaultMarginLeft"
+			android:paddingTop="5dp"
+			android:paddingBottom="5dp">
+
+			<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
+
+				<TextView
+					android:id="@+id/task_title"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/poppins"
+					android:text="@string/task"
+					android:textColor="@color/dark_alpha"
+					android:textFontWeight="600"
+					android:textSize="16dp"
+					android:gravity="start|left"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintEnd_toEndOf="parent" />
+			</androidx.constraintlayout.widget.ConstraintLayout>
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintBottom_toBottomOf="parent"
+				android:gravity="center_vertical">
+
+				<ImageView
+					android:layout_width="16dp"
+					android:layout_height="16dp"
+					android:src="@drawable/ic_calendar"
+					android:background="@android:color/transparent"
+					app:background="@android:color/transparent"
+					app:tint="@color/gray" />
+
+				<TextView
+					android:id="@+id/task_deadline"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/poppins"
+					android:text="14.30, 12 Des 2023"
+					android:textColor="@color/gray_dark"
+					android:textFontWeight="500"
+					android:textSize="10dp"
+					android:layout_marginLeft="4dp" />
+
+			</LinearLayout>
+
+			<androidx.cardview.widget.CardView
+				android:id="@+id/task_category_wrapper"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintBottom_toBottomOf="parent"
+				android:background="@color/purple_alpha"
+				app:background="@color/purple_alpha"
+				android:backgroundTint="@color/purple_alpha"
+				app:backgroundTint="@color/purple_alpha"
+				app:cardCornerRadius="5dp"
+				app:cardElevation="0dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:paddingTop="3dp"
+					android:paddingBottom="3dp"
+					android:paddingLeft="10dp"
+					android:paddingRight="10dp">
+
+					<TextView
+						android:id="@+id/task_category"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/poppins"
+						android:text="Category"
+						android:textColor="@color/purple"
+						android:textFontWeight="600"
+						android:textSize="10dp" />
+				</LinearLayout>
+			</androidx.cardview.widget.CardView>
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+		<!-- Action -->
+
+	</LinearLayout>
+</androidx.cardview.widget.CardView>
+

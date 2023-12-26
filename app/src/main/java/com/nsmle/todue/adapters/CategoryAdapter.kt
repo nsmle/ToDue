@@ -36,26 +36,25 @@ class CategoryAdapter(private val categories: MutableList<Category>) :
 		return ViewHolder(itemView)
 	}
 
-	override fun onBindViewHolder(holder: CategoryAdapter.ViewHolder, iterator: Int) {
+	override fun onBindViewHolder(holder: CategoryAdapter.ViewHolder, position: Int) {
 		val itemViewParams = holder.itemView.layoutParams as ViewGroup.MarginLayoutParams
 		val density = holder.context.resources.displayMetrics.density
+		val category = categories[position]
 
 		Log.i("APP", "density = " + density)
-		Log.i("APP", "Pos = " + iterator)
-		Log.i("APP", "Color = " + categories[iterator].color)
+		Log.i("APP", "Pos = " + position)
+		Log.i("APP", "Color = " + category.color)
 
-		when (iterator) {
+		when (position) {
 			0                   -> itemViewParams.setMargins((16 * density).toInt(), 0, 0, 0)
 			categories.size - 1 -> itemViewParams.setMargins((8 * density).toInt(), 0, (16 * density).toInt(), 0)
 			else                -> itemViewParams.setMargins((8 * density).toInt(), 0, 0, 0)
 		}
 
-		holder.categoryTitle.text = categories[iterator].title
-		holder.categoryTitle.setTextColor(ContextCompat.getColor(holder.context, categories[iterator].color))
-		holder.itemView.backgroundTintList = ContextCompat.getColorStateList(holder.context, categories[iterator].background)
+		holder.categoryTitle.text = category.title
+		holder.categoryTitle.setTextColor(ContextCompat.getColor(holder.context, category.color))
+		holder.itemView.backgroundTintList = ContextCompat.getColorStateList(holder.context, category.background)
 	}
 
-	override fun getItemCount(): Int {
-		return categories.size
-	}
+	override fun getItemCount(): Int = categories.size
 }
