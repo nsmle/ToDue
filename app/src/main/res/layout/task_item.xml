@@ -8,19 +8,22 @@
 	app:cardCornerRadius="10dp"
 	android:layout_marginBottom="10dp">
 
-	<!-- Icon -->
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:minHeight="85dp"
 		android:padding="14dp"
 		android:orientation="horizontal"
 		android:layout_gravity="center_vertical"
 		android:gravity="center_vertical">
 
+		<!-- Icon -->
 		<androidx.cardview.widget.CardView
 			android:id="@+id/task_icon_wrapper"
+			android:visibility="visible"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginRight="@dimen/defaultMarginRight"
 			android:background="@color/pink_alpha"
 			app:background="@color/pink_alpha"
 			android:backgroundTint="@color/pink_alpha"
@@ -46,12 +49,10 @@
 
 		<!-- Content -->
 		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/task_content_wrapper"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:orientation="vertical"
-			android:layout_marginLeft="@dimen/defaultMarginLeft"
-			android:paddingTop="5dp"
-			android:paddingBottom="5dp">
+			android:orientation="vertical">
 
 			<androidx.constraintlayout.widget.ConstraintLayout
 				android:layout_width="match_parent"
@@ -64,14 +65,15 @@
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/poppins"
+					android:gravity="start|left"
 					android:text="@string/task"
 					android:textColor="@color/dark_alpha"
 					android:textFontWeight="600"
 					android:textSize="16dp"
-					android:gravity="start|left"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintHorizontal_bias="0.0"
 					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toTopOf="parent"
-					app:layout_constraintEnd_toEndOf="parent" />
+					app:layout_constraintTop_toTopOf="parent" />
 			</androidx.constraintlayout.widget.ConstraintLayout>
 
 			<LinearLayout

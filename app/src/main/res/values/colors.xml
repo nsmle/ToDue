@@ -29,6 +29,7 @@
 	<color name="teal_alpha">#8038e0d4</color>
 
 	<!-- Gray -->
+	<color name="gray_extra_light_alpha">#e6E2E2E2</color>
 	<color name="gray_extra_light">#E2E2E2</color>
 	<color name="gray_light">#d2d2d2</color>
 	<color name="gray">#b2b2b2</color>

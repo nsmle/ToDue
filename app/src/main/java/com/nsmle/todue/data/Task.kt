@@ -9,8 +9,8 @@ import java.util.Calendar
 data class Task(
 	val title: String,
 	val description: String? = "",
-	val icon: Icon? = Icon.CHART,
-	var iconColor: IconColor? = IconColor.PINK,
+	val icon: Icon?,
+	var iconColor: IconColor?,
 	val status: TaskStatus? = TaskStatus.LOW,
 	val isRepeatable: Boolean? = false,
 	val deadlineAt: String? = LocalDateTime.now().toString(),

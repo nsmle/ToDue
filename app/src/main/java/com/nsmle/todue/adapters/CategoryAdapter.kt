@@ -1,17 +1,12 @@
 package com.nsmle.todue.adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginLeft
-import androidx.core.view.setMargins
 import androidx.recyclerview.widget.RecyclerView
 import com.nsmle.todue.R
 import com.nsmle.todue.data.Category

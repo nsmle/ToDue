@@ -1,0 +1,115 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:padding="@dimen/defaultPadding"
+	android:background="@drawable/bg_top_round"
+	android:backgroundTint="?attr/colorOnPrimary"
+	app:backgroundTint="?attr/colorOnPrimary">
+
+	<TextView
+		android:id="@+id/text_add_task"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:text="@string/add_task"
+		android:textSize="15dp"
+		android:textStyle="bold"
+		android:textColor="?android:attr/textColor"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent" />
+
+	<EditText
+		android:id="@+id/input_task_title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="80dp"
+		android:layout_marginTop="20dp"
+		android:padding="10dp"
+		android:background="@drawable/bg_round"
+		android:backgroundTint="@color/clean"
+		android:textStyle="normal"
+		android:fontFamily="@font/poppins"
+		android:textSize="13dp"
+		android:hint="@string/add_task_hint"
+		android:textColorHint="@color/gray_dark"
+		android:textCursorDrawable="@drawable/cursor"
+		android:textFontWeight="500"
+		android:textColor="@color/dark"
+		android:inputType="textMultiLine"
+		app:layout_constraintTop_toBottomOf="@+id/text_add_task"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent" />
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_height="wrap_content"
+		android:layout_width="0dp"
+		android:layout_marginTop="10dp"
+		app:layout_constraintTop_toBottomOf="@id/input_task_title"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toStartOf="@+id/submit_task"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent">
+
+			<AutoCompleteTextView
+				android:id="@+id/input_task_category"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:hint="Tidak ada Kategori"
+				android:inputType="none"
+				android:background="@drawable/bg_round"
+				android:textSize="11dp"
+				android:focusableInTouchMode="false"
+				android:focusable="false"
+				android:textColor="@color/purple_light"
+				android:textColorHint="@color/purple_light"
+				android:textFontWeight="500"
+				android:backgroundTint="@color/purple_light_alpha"
+				android:paddingVertical="6dp"
+				android:paddingHorizontal="10dp"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintBottom_toBottomOf="parent" />
+
+			<ImageButton
+				android:id="@+id/btn_input_task_deadline"
+				android:layout_width="34dp"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_calendar_check"
+				android:background="@drawable/bg_round"
+				android:backgroundTint="@color/clean"
+				app:backgroundTint="@color/clean"
+				android:scaleType="center"
+				app:tint="@color/gray"
+				android:layout_marginLeft="10dp"
+				android:paddingVertical="6dp"
+				app:layout_constraintStart_toEndOf="@id/input_task_category"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintBottom_toBottomOf="parent" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+		<ImageButton
+			android:id="@+id/submit_task"
+			android:layout_width="58dp"
+			android:layout_height="34dp"
+			android:src="@drawable/ic_paper_plane"
+			android:background="@drawable/bg_round_8"
+			android:backgroundTint="@color/purple"
+			android:scaleType="center"
+			app:tint="@color/purple_light"
+			app:backgroundTint="@color/purple_alpha"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

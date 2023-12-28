@@ -18,7 +18,7 @@
 			android:layout_marginLeft="@dimen/defaultMarginLeft"
 			android:layout_marginRight="@dimen/defaultMarginRight"
 			android:layout_marginTop="30dp"
-			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="parent"
 			app:layout_constraintTop_toTopOf="parent">
 
 			<TextView

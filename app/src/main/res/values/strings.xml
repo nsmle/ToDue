@@ -6,6 +6,8 @@
 	<string name="title_notifications">Notifikasi</string>
 
 	<string name="task">Tugas</string>
+	<string name="add_task">Tambah Tugas</string>
+	<string name="add_task_hint">Masukan tugas baru</string>
 	<string name="summary_task_primary_label">Selesai</string>
 	<string name="summary_task_secondary_label">Mendesak</string>
 </resources>

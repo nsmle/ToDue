@@ -1,35 +1,59 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.ToDue" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Text Color-->
-        <item name="android:textColor">@color/dark</item>
-        <item name="android:textColorPrimary">@color/purple</item>
-        <item name="android:textColorSecondary">@color/gray_dark</item>
+	<!-- Base application theme. -->
+	<style name="Theme.ToDue" parent="Theme.MaterialComponents.Light.DarkActionBar">
+		<!-- Text Color-->
+		<item name="android:textColor">@color/dark</item>
+		<item name="android:textColorPrimary">@color/purple</item>
+		<item name="android:textColorSecondary">@color/gray_dark</item>
 
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple</item>
-        <item name="colorPrimaryVariant">@color/purple_light</item>
-        <item name="colorOnPrimary">@color/white</item>
+		<!-- Primary brand color. -->
+		<item name="colorPrimary">@color/purple</item>
+		<item name="colorPrimaryVariant">@color/purple_light</item>
+		<item name="colorOnPrimary">@color/white</item>
 
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/blue</item>
-        <item name="colorSecondaryVariant">@color/blue_light</item>
-        <item name="colorOnSecondary">@color/gray</item>
+		<!-- Secondary brand color. -->
+		<item name="colorSecondary">@color/blue</item>
+		<item name="colorSecondaryVariant">@color/blue_light</item>
+		<item name="colorOnSecondary">@color/gray</item>
 
-        <!-- Status bar. -->
-        <item name="android:statusBarColor">?android:attr/backgroundTint</item>
-        <item name="android:windowLightStatusBar">true</item>
+		<!-- Status bar. -->
+		<item name="android:statusBarColor">?android:attr/backgroundTint</item>
+		<item name="android:windowLightStatusBar">true</item>
 
-        <!-- Navigation Bar.-->
-        <item name="android:navigationBarColor">@color/white</item>
-        <item name="android:windowLightNavigationBar">true</item>
+		<!-- Navigation Bar.-->
+		<item name="android:navigationBarColor">@color/white</item>
+		<item name="android:windowLightNavigationBar">true</item>
 
-        <!-- Font -->
-        <item name="android:fontFamily">@font/poppins</item>
-        <item name="fontFamily">@font/poppins</item>
+		<!-- Font -->
+		<item name="android:fontFamily">@font/poppins</item>
+		<item name="fontFamily">@font/poppins</item>
 
-        <!-- Background Color -->
-        <item name="android:backgroundTint">@color/clean</item>
-    </style>
+		<!-- Background Color -->
+		<item name="android:backgroundTint">@color/clean</item>
+
+		<!-- Bottom Sheet -->
+		<item name="bottomSheetDialogTheme">@style/Theme.ToDue.BottomSheetDialog</item>
+		<item name="android:dialogTheme">@style/Theme.ToDue.Dialog</item>
+	</style>
+
+	<style name="Theme.ToDue.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+		<item name="bottomSheetStyle">@style/Theme.ToDue.BottomSheetModalModal</item>
+		<item name="android:navigationBarColor">@color/white</item>
+		<item name="android:windowLightNavigationBar">true</item>
+
+		<item name="android:windowLightStatusBar">false</item>
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:statusBarColor">@color/white</item>
+		<item name="android:windowSoftInputMode">adjustResize</item>
+	</style>
+
+	<style name="Theme.ToDue.BottomSheetModalModal" parent="Widget.Design.BottomSheet.Modal">
+		<item name="android:background">@drawable/bg_top_round</item>
+	</style>
+
+	<style name="Theme.ToDue.Dialog" parent="@style/Theme.AppCompat.Light.Dialog">
+		<item name="android:background">@drawable/bg_round_8</item>
+		<item name="android:windowBackground">@drawable/bg_round_8</item>
+	</style>
 
 </resources>
