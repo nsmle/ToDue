@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:backgroundTint="?attr/colorOnPrimary"
 	app:cardElevation="0dp"
 	app:cardCornerRadius="10dp"
-	android:layout_marginBottom="10dp">
+	android:layout_marginBottom="10dp"
+	app:layout_constraintStart_toStartOf="parent"
+	app:layout_constraintEnd_toEndOf="parent"
+	app:layout_constraintTop_toTopOf="parent"
+	app:layout_constraintBottom_toBottomOf="parent">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -16,6 +21,13 @@
 		android:orientation="horizontal"
 		android:layout_gravity="center_vertical"
 		android:gravity="center_vertical">
+
+		<!-- Id Helper -->
+		<TextView
+			android:id="@+id/task_id"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:visibility="gone" />
 
 		<!-- Icon -->
 		<androidx.cardview.widget.CardView
@@ -96,7 +108,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/poppins"
-					android:text="14.30, 12 Des 2023"
+					android:text="04.30, 05 Sep 2003"
 					android:textColor="@color/gray_dark"
 					android:textFontWeight="500"
 					android:textSize="10dp"
@@ -142,4 +154,3 @@
 
 	</LinearLayout>
 </androidx.cardview.widget.CardView>
-

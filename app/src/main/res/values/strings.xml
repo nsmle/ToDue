@@ -6,8 +6,16 @@
 	<string name="title_notifications">Notifikasi</string>
 
 	<string name="task">Tugas</string>
+	<string name="task_done">Tugas Selesai</string>
+	<string name="tasks_not_found">Belum ada tugas</string>
 	<string name="add_task">Tambah Tugas</string>
 	<string name="add_task_hint">Masukan tugas baru</string>
 	<string name="summary_task_primary_label">Selesai</string>
-	<string name="summary_task_secondary_label">Mendesak</string>
+	<string name="summary_task_secondary_label">Mendatang</string>
+
+	<string name="pick_category_task">Kategori Tugas</string>
+	<string name="pick_icon_task">Ikon Tugas</string>
+	<string name="pick_icon_color_task">Warna Ikon</string>
+	<string name="picked_icon">Ikon Dipilih</string>
+
 </resources>

@@ -54,11 +54,11 @@
 			android:layout_width="0dp"
 			android:layout_height="0dp"
 			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toStartOf="@+id/submit_task"
+			app:layout_constraintEnd_toStartOf="@+id/button_save_task"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent">
 
-			<AutoCompleteTextView
+			<TextView
 				android:id="@+id/input_task_category"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -94,10 +94,26 @@
 				app:layout_constraintTop_toTopOf="parent"
 				app:layout_constraintBottom_toBottomOf="parent" />
 
+			<ImageButton
+				android:id="@+id/btn_input_task_icon"
+				android:layout_width="34dp"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_all_icons"
+				android:background="@drawable/bg_round"
+				android:backgroundTint="@color/clean"
+				app:backgroundTint="@color/clean"
+				android:scaleType="center"
+				app:tint="@color/gray"
+				android:layout_marginLeft="10dp"
+				android:paddingVertical="6dp"
+				app:layout_constraintStart_toEndOf="@id/btn_input_task_deadline"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintBottom_toBottomOf="parent" />
+
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
 		<ImageButton
-			android:id="@+id/submit_task"
+			android:id="@+id/button_save_task"
 			android:layout_width="58dp"
 			android:layout_height="34dp"
 			android:src="@drawable/ic_paper_plane"

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:padding="20dp">
+
+	<androidx.appcompat.widget.LinearLayoutCompat
+		android:id="@+id/icon_picked_wrapper"
+		android:visibility="gone"
+		android:layout_width="0dp"
+		android:paddingBottom="@dimen/defaultPaddingBottom"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/text_icon_picked"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/picked_icon"
+			android:textSize="18dp"
+			android:textStyle="bold"
+			android:textColor="?android:attr/textColor"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+		>
+
+		<androidx.cardview.widget.CardView
+			android:id="@+id/icon_picked_container"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@color/pink_alpha"
+			app:background="@color/pink_alpha"
+			android:backgroundTint="@color/pink_alpha"
+			app:backgroundTint="@color/pink_alpha"
+			app:cardCornerRadius="14dp"
+			android:layout_marginTop="8dp"
+			app:cardElevation="0dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/text_icon_picked">
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="8dp">
+
+				<ImageView
+					android:id="@+id/icon_picked"
+					android:layout_width="40dp"
+					android:layout_height="40dp"
+					android:src="@drawable/ic_chart"
+					android:background="@android:color/transparent"
+					app:background="@android:color/transparent"
+					android:tintMode="src_in"
+					app:tintMode="src_in"
+					app:tint="@color/pink" />
+			</LinearLayout>
+		</androidx.cardview.widget.CardView>
+	</androidx.appcompat.widget.LinearLayoutCompat>
+
+	<TextView
+		android:id="@+id/text_pick_icon"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/pick_icon_task"
+		android:textSize="18dp"
+		android:textStyle="bold"
+		android:textColor="?android:attr/textColor"
+		app:layout_constraintTop_toBottomOf="@id/icon_picked_wrapper"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent" />
+	>
+
+	<GridView
+		android:id="@+id/icons_gv"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:numColumns="4"
+		android:horizontalSpacing="6dp"
+		android:verticalSpacing="12dp"
+		android:layout_marginTop="8dp"
+		android:background="@drawable/bg_round"
+		android:backgroundTint="@color/white_alpha"
+		app:backgroundTint="@color/white_alpha"
+		android:padding="@dimen/defaultPadding"
+		app:layout_constraintTop_toBottomOf="@id/text_pick_icon"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent" />
+
+	<TextView
+		android:id="@+id/text_pick_icon_color"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/pick_icon_color_task"
+		android:layout_marginTop="@dimen/defaultMarginTop"
+		android:textSize="18dp"
+		android:textStyle="bold"
+		android:textColor="?android:attr/textColor"
+		app:layout_constraintTop_toBottomOf="@id/icons_gv"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent" />
+	>
+
+	<GridView
+		android:id="@+id/icon_colors_gv"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:numColumns="4"
+		android:horizontalSpacing="6dp"
+		android:verticalSpacing="12dp"
+		android:layout_marginTop="8dp"
+		android:background="@drawable/bg_round"
+		android:backgroundTint="@color/white_alpha"
+		app:backgroundTint="@color/white_alpha"
+		android:padding="@dimen/defaultPadding"
+		app:layout_constraintTop_toBottomOf="@id/text_pick_icon_color"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+

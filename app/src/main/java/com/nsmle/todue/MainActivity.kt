@@ -1,6 +1,7 @@
 package com.nsmle.todue
 
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.nsmle.todue.data.repository.TaskDao
 import com.nsmle.todue.databinding.ActivityMainBinding
 import com.nsmle.todue.ui.dialog.AddTaskBottomSheetDialogFragment
+import com.nsmle.todue.utils.interfaces.DialogListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,7 +46,15 @@ class MainActivity : AppCompatActivity() {
 
 		// Handle Fab
 		binding.fab.setOnClickListener {
-			AddTaskBottomSheetDialogFragment().show(supportFragmentManager, AddTaskBottomSheetDialogFragment.TAG)
+			val addTaskBottomDialog = AddTaskBottomSheetDialogFragment()
+
+			val fragments = supportFragmentManager.findFragmentById(navFragmentHost)?.childFragmentManager?.fragments
+			val activeFragment = fragments?.get(0)
+
+
+			Log.i("APP", activeFragment?.javaClass?.simpleName + " Is Extends DialogListener " + (activeFragment is DialogListener))
+			if (activeFragment is DialogListener) addTaskBottomDialog.setListener(activeFragment)
+			addTaskBottomDialog.show(supportFragmentManager, AddTaskBottomSheetDialogFragment.TAG)
 		}
 	}
 }

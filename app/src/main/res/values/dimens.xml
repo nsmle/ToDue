@@ -19,5 +19,7 @@
 	<dimen name="defaultMarginBottom">16dp</dimen>
 	<dimen name="defaultFabMarginBottom">64dp</dimen>
 	<dimen name="defaultFragmentMarginBottom">48dp</dimen>
+	<dimen name="list_item_spacing">16dp</dimen>
+	<dimen name="list_item_spacing_half">8dp</dimen>
 
 </resources>
