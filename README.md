@@ -16,7 +16,7 @@ Built with [kotlin](https://kotlinlang.org/) and love :heart:
 <br>
 
 ### Download Debug App
-<a id="download-debug-app" href="https://github.com/nsmle/todue-test/releases/download/v1.0-debug/ToDue-v1.0-debug.apk">
+<a id="download-debug-app" href="https://github.com/nsmle/ToDue/releases/download/v1.0-debug/ToDue-v1.0-debug.apk">
 	<img src="app/src/main/res/drawable/pic_download_icon.png" height="120" alt="download-debug-app">
 </a>
 
