@@ -1,0 +1,233 @@
+name: 🚀 Build Debug and Release App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  prepare:
+    name: "🔧 Prepare"
+    runs-on: ubuntu-latest
+    outputs:
+      only-readme-changes: ${{ steps.readme-changes.outputs.only-readme-changes }}
+      app-name: ${{ steps.app-info.outputs.app-name }}
+      app-id: ${{ steps.app-info.outputs.app-id }}
+      app-target-sdk: ${{ steps.app-info.outputs.app-target-sdk }}
+      app-minimum-sdk: ${{ steps.app-info.outputs.app-minimum-sdk }}
+      app-version-code: ${{ steps.app-info.outputs.app-version-code }}
+      app-version-name: ${{ steps.app-info.outputs.app-version-name }}
+    steps:
+      - name: 🚩 Get Latest Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: ⌚ Check Only Changes in README.md
+        id: readme-changes
+        run: |
+          changed_files=$(git diff --name-only HEAD^ HEAD)
+          echo $changed_files
+          if [ "$(echo "$changed_files" | wc -l)" -eq 1 ] && [ "$(echo "$changed_files" | tr '[:upper:]' '[:lower:]')" = "readme.md" ]; then
+            echo "only-readme-changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "only-readme-changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 📄 Get App Information
+        id: app-info
+        run: | 
+          echo "app-name=$(grep -oP 'rootProject.name\s*=\s*\"[^\"]+\"' settings.gradle | cut -d '"' -f2)" >> $GITHUB_OUTPUT
+          echo "app-id=$(grep -oP 'applicationId\s+"[^"]+"' app/build.gradle | cut -d '"' -f2)"            >> $GITHUB_OUTPUT
+          echo "app-target-sdk=$(grep -oP 'targetSdk\s+[0-9]+' app/build.gradle | awk '{print $2}')"       >> $GITHUB_OUTPUT
+          echo "app-minimum-sdk=$(grep -oP 'minSdk\s+[0-9]+' app/build.gradle | awk '{print $2}')"         >> $GITHUB_OUTPUT
+          echo "app-version-code=$(grep -oP 'versionCode\s+[0-9]+' app/build.gradle | awk '{print $2}')"   >> $GITHUB_OUTPUT
+          echo "app-version-name=$(grep -oP 'versionName\s+"[^"]+"' app/build.gradle | cut -d '"' -f2)"    >> $GITHUB_OUTPUT
+
+  build:
+    name: "🔨 Build App"
+    runs-on: ubuntu-latest
+    needs: prepare
+    if: needs.prepare.outputs.only-readme-changes == 'false'
+    env: 
+      JAVA_VERSION: 17
+      JAVA_DISTRIBUTION: oracle
+    outputs:
+      app-name: ${{ needs.prepare.outputs.app-name }}
+      app-target-sdk: ${{ needs.prepare.outputs.app-minimum-sdk }}
+      app-minimum-sdk: ${{ needs.prepare.outputs.app-target-sdk }}
+      app-debug-name: ${{ steps.build-debug.outputs.app-debug-name }}
+      app-debug-artifact-name: ${{ steps.build-debug.outputs.app-debug-artifact-name }}
+      app-debug-artifact-path: ${{ steps.build-debug.outputs.app-debug-artifact-path }}
+      app-version-code: ${{ needs.prepare.outputs.app-version-code }}
+      app-version-name: ${{ needs.prepare.outputs.app-version-name }}
+    steps:
+      - name: 🚩 Get Latest Code
+        uses: actions/checkout@v3
+
+      - name: 🚚 Setup JDK ${{ env.JAVA_VERSION }}
+        id: setup-jdk
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: gradle
+
+      - name: 🔨 Build Debug App
+        id: build-debug
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+          app_version_filename=$(echo ${{ needs.prepare.outputs.app-name }} | sed 's/ //g')-v${{ needs.prepare.outputs.app-version-name }}-debug
+          app_filename=${app_version_filename}.apk
+          app_path=app/build/outputs/apk/debug/
+          mv $app_path/app-debug.apk $app_path/$app_filename
+          
+          echo "app-debug-name=$app_filename"                               >> $GITHUB_OUTPUT
+          echo "app-debug-path=$app_path"                                   >> $GITHUB_OUTPUT
+          echo "app-debug-artifact-name=${app_version_filename}-artifact"   >> $GITHUB_OUTPUT
+          echo "app-debug-artifact-path=$app_path"                          >> $GITHUB_OUTPUT
+
+      - name: 📁 Upload Build Debug Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.build-debug.outputs.app-debug-artifact-name }}
+          path: ${{ steps.build-debug.outputs.app-debug-artifact-path }}/${{steps.build-debug.outputs.app-debug-name}}
+
+      - name: 🏁 Cache Gradle Dependencies
+        if: steps.setup-jdk.outputs.cache-hit == 'false'
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: setup-java-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: setup-java-${{ runner.os }}-gradle-
+
+  release:
+    name: 🚀 Release App v${{ needs.build.outputs.app-version-name }}
+    needs: build
+    runs-on: ubuntu-latest
+    env: 
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} 
+    outputs:
+      app-debug-download-url: ${{ steps.upload-debug-release-asset.outputs.browser_download_url }}
+    steps:
+      - name: 🚩 Get Latest Code
+        uses: actions/checkout@v3
+      
+      - name: 📂 Download Build Debug Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ needs.build.outputs.app-debug-artifact-name }}
+          path: ${{ needs.build.outputs.app-debug-artifact-path }}
+
+      - name: 🏷️ Get Existing Debug Release
+        id: exist-debug-release
+        run: |
+          release_list=$(gh release list)
+          echo "latest-short-commit=$(git rev-parse --short HEAD)"  >> $GITHUB_OUTPUT
+          if echo "$release_list" | grep -q "v${{ needs.build.outputs.app-version-name }}-debug"; then
+            release_id=$(gh release view v${{ needs.build.outputs.app-version-name }}-debug --json id --template '{{.id}}' 2>/dev/null)
+            release_upload_url=$(gh release view v${{ needs.build.outputs.app-version-name }}-debug --json uploadUrl --template '{{.uploadUrl}}' 2>/dev/null)
+            release_tag_name=$(gh release view v${{ needs.build.outputs.app-version-name }}-debug --json tagName --template '{{.tagName}}' 2>/dev/null)
+            echo "release-id=${release_id}"                  >> $GITHUB_OUTPUT
+            echo "release-upload-url=${release_upload_url}"  >> $GITHUB_OUTPUT
+            echo "release-tag-name=${release_tag_name}"      >> $GITHUB_OUTPUT
+          
+            asset_id=$(gh release view v${{ needs.build.outputs.app-version-name }}-debug --json assets --template '{{range .assets}}{{.apiUrl}} {{end}}' 2>/dev/null)
+            echo "asset-id=$(echo $asset_id | sed 's/.*\/\([0-9]\+\)$/\1/')"  >> $GITHUB_OUTPUT
+          else
+            echo "asset-id="              >> $GITHUB_OUTPUT
+            echo "release-id="            >> $GITHUB_OUTPUT
+            echo "release-upload-url="    >> $GITHUB_OUTPUT
+            echo "release-tag-name="      >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🏷️ Create v${{ needs.build.outputs.app-version-name }} Debug Tag
+        uses: rickstaa/action-create-tag@v1
+        id: create-debug-tag
+        with:
+          tag: v${{ needs.build.outputs.app-version-name }}-debug
+          message: "Release v${{ needs.build.outputs.app-version-name }} Debug"
+          tag_exists_error: false
+          force_push_tag: true
+
+      - name: 📌 Create v${{ needs.build.outputs.app-version-name }} Debug Release
+        id: create-debug-release
+        if: steps.exist-debug-release.outputs.release-id == ''
+        uses: actions/create-release@v1
+        with:
+          body: |
+            ## Release v${{ needs.build.outputs.app-version-name }} Debug 
+
+            Minimum Sdk: ${{ needs.build.outputs.app-minimum-sdk }} 
+            Target  Sdk: ${{ needs.build.outputs.app-target-sdk }}
+          tag_name: v${{ needs.build.outputs.app-version-name }}-debug
+          release_name: v${{ needs.build.outputs.app-version-name }}-debug
+          draft: true
+
+      - name: 📌 Get v${{ needs.build.outputs.app-version-name }} Debug Release
+        id: debug-release
+        run: |
+          if [ -z "${{ steps.exist-debug-release.outputs.release-id }}" ]; then
+            echo "id=${{ steps.create-debug-release.outputs.id }}"                  >> $GITHUB_OUTPUT
+            echo "upload-url=${{ steps.create-debug-release.outputs.upload_url }}"  >> $GITHUB_OUTPUT
+          else
+            echo "id=${{ steps.exist-debug-release.outputs.release-id }}"                   >> $GITHUB_OUTPUT
+            echo "upload-url=${{ steps.exist-debug-release.outputs.release-upload-url }}"   >> $GITHUB_OUTPUT
+          fi  
+
+      - name: 📌 Delete Existing v${{ needs.build.outputs.app-version-name }} Debug Release Asset
+        if: steps.exist-debug-release.outputs.release-id != ''
+        uses: mknejp/delete-release-assets@v1
+        with:
+          token: ${{ env.GITHUB_TOKEN }}
+          tag: v${{ needs.build.outputs.app-version-name }}-debug
+          assets: ${{ needs.build.outputs.app-debug-name }}
+
+      - name: 📌 Upload v${{ needs.build.outputs.app-version-name }} Debug Release Asset
+        # if: steps.exist-debug-release.outputs.release-id == ''
+        id: upload-debug-release-asset
+        uses: actions/upload-release-asset@v1.0.1
+        with:
+          upload_url: ${{ steps.debug-release.outputs.upload-url }}
+          asset_name: ${{ needs.build.outputs.app-debug-name }}
+          asset_path: ${{ needs.build.outputs.app-debug-artifact-path }}/${{ needs.build.outputs.app-debug-name }}
+          asset_content_type: application/vnd.android.package-archive
+
+      - name: 📌 Publish v${{ needs.build.outputs.app-version-name }} Debug Release
+        if: steps.exist-debug-release.outputs.release-id == ''
+        uses: eregon/publish-release@v1
+        with:
+          release_id: ${{ steps.create-debug-release.outputs.id }}
+  
+  
+  update-readme:
+    name: 🎉 Update README.md
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚩 Get Latest Code
+        uses: actions/checkout@v3
+
+      - name: 🚚 Update Debug Download Link in README.md
+        id: update-debug-download-link
+        run: |
+          sed -i "s|<a id=\"download-debug-app\" href=\"[^\"]*\">|<a id=\"download-debug-app\" href=\"${{ needs.release.outputs.app-debug-download-url }}\">|g" "README.md"
+
+          if echo "$(git diff --name-only)" | grep -q "README.md"; then
+            echo "readme-changed=true"  >> $GITHUB_OUTPUT
+          else
+            echo "readme-changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🚀 Commit and Push Changes
+        if: steps.update-debug-download-link.outputs.readme-changed == 'true'
+        run: |
+          git config --global user.email "${{ github.event.repository.owner.email }}"
+          git config --global user.name "Automated: ${{ github.event.repository.owner.name }}"
+
+          git add README.md
+          git commit -m "Docs: Update Debug Download Link"
+          git push origin ${{ github.ref_name }}
