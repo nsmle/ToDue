@@ -54,8 +54,8 @@ jobs:
       JAVA_DISTRIBUTION: oracle
     outputs:
       app-name: ${{ needs.prepare.outputs.app-name }}
-      app-target-sdk: ${{ needs.prepare.outputs.app-minimum-sdk }}
-      app-minimum-sdk: ${{ needs.prepare.outputs.app-target-sdk }}
+      app-target-sdk: ${{ needs.prepare.outputs.app-target-sdk }}
+      app-minimum-sdk: ${{ needs.prepare.outputs.app-minimum-sdk }}
       app-debug-name: ${{ steps.build-debug.outputs.app-debug-name }}
       app-debug-artifact-name: ${{ steps.build-debug.outputs.app-debug-artifact-name }}
       app-debug-artifact-path: ${{ steps.build-debug.outputs.app-debug-artifact-path }}
@@ -161,8 +161,8 @@ jobs:
           body: |
             ## Release v${{ needs.build.outputs.app-version-name }} Debug 
 
-            Minimum Sdk: ${{ needs.build.outputs.app-minimum-sdk }} 
             Target  Sdk: ${{ needs.build.outputs.app-target-sdk }}
+            Minimum Sdk: ${{ needs.build.outputs.app-minimum-sdk }} 
           tag_name: v${{ needs.build.outputs.app-version-name }}-debug
           release_name: v${{ needs.build.outputs.app-version-name }}-debug
           draft: true
