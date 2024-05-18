@@ -26,14 +26,3 @@ Built with [kotlin](https://kotlinlang.org/) and love :heart:
 (as soon as possible)
 
 <br>
-
-## Contributors
-<table>
-  <tbody>
-    <tr>
-      <td align="center"><a href="mailto:fikipratama@students.amikom.ac.id" items="center"><img src="https://fotomhs.amikom.ac.id/2022/22_12_2551.jpg" height="200px;" alt="Fiki Pratama (22.12.2551)"><br><span><b>Fiki Pratama</b></span><br><span><sup>22.12.2551</sup></span></a></td>
-      <td align="center"><a href="mailto:sabibprastio@students.amikom.ac.id" items="center"><img src="https://fotomhs.amikom.ac.id/2022/22_12_2598.jpg" height="200px;" alt="Sabib Prastio (22.12.2598)"><br><span><b>Sabib Prastio</b></span><br><span><sup>22.12.2598</sup></span></a></td>
-      <td align="center"><a href="mailto:valensisurya@students.amikom.ac.id" items="center"><img src="https://fotomhs.amikom.ac.id/2022/22_12_2578.jpg" height="200px;" alt="Valensi Surya P (22.12.2560)"><br><span><b>Valensi Surya P</b></span><br><span><sup>22.12.2578</sup></span></a></td>
-    </tr>
-  </tbody>
-</table>
